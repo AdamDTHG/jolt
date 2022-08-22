@@ -1,0 +1,4 @@
+# ninja log v5
+0	341	1661109049740809082	CMakeFiles/jolt.dir/main.cpp.o	9ecc3eff5cc31025
+21	50	1661109500532929093	CMakeFiles/jolt.dir/parser.cpp.o	432d0ab57ddf880e
+51	114	1661109500597857144	jolt	e2dbd2446a7c96b0
