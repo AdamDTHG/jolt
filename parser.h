@@ -6,7 +6,9 @@
 #define JOLT_PARSER_H
 
 
+#include <iostream>
 #include <vector>
+#include "constantpool.h"
 
 class parser {
 public:

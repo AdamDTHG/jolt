@@ -25,13 +25,14 @@ std::vector<unsigned char> readFile(std::string const& filename) {
 }
 
 int main(int argc, char* argv[]) {
-    if (argc > 0) {
-        std::vector<unsigned char> data = readFile(argv[1]);
-        dbg::DEBUG_BUFFER(data);
-        parser p;
-        p.parse(data);
-    } else {
-        std::cout << "USAGE: ./jolt <path_to_classfile>" << "\n";
+    if (argc <= 1) {
+        std::cerr << "USAGE: ./jolt <path_to_classfile>" << "\n";
+        exit(1);
     }
+
+    std::vector<unsigned char> data = readFile(argv[1]);
+//    dbg::DEBUG_BUFFER(data);
+    parser p;
+    p.parse(data);
     return 0;
 }
