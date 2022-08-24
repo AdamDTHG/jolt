@@ -15,10 +15,10 @@ std::vector<unsigned char> readFile(std::string const& filename) {
         exit(1);
     }
 
-    inFile >> tmp;
+    inFile >> std::noskipws >> tmp;
     while (!inFile.eof()) {
         data.push_back(tmp);
-        inFile >> tmp;
+        inFile >> std::noskipws >> tmp;
     }
     inFile.close();
     return data;
@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 
     std::vector<unsigned char> data = readFile(argv[1]);
 //    dbg::DEBUG_BUFFER(data);
-    parser p;
+    parser p{};
     p.parse(data);
     return 0;
 }

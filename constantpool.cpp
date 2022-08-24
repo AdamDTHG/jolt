@@ -3,15 +3,13 @@
 //
 
 #include "constantpool.h"
+#include "parser.h"
 
-constantpool::constantpool(std::vector<unsigned char> const& data_buffer, int const& n_bytes, long const& current_index = 0) {
-    long i = current_index;
-    for(i; i<n_bytes+1; i++) {
-        cp_list.push_back(data_buffer[i]);
-    }
+constantpool::constantpool(std::vector<unsigned char> const& data_buffer, int const& n_bytes, int const& current_index) {
+    current_index;
 }
 
-std::vector<unsigned char> const& constantpool::get_cp_list() const {
+std::vector<unsigned char> constantpool::get_cp_list() const {
     return cp_list;
 }
 

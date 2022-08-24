@@ -16,15 +16,20 @@ public:
 
     void parse(const std::vector<unsigned char> &data_buffer);
 
+
 private:
-    int current_index = 0;
+    int current_index;
     int u(const std::vector<unsigned char> &data_buffer);
 
     uint16_t u2(const std::vector<unsigned char> &data_buffer);
 
     uint32_t u4(const std::vector<unsigned char> &data_buffer);
 
-    uint64_t u8(const std::vector<unsigned char> &data_buffer);
+//    uint64_t u8(const std::vector<unsigned char> &data_buffer);
+
+    std::vector<std::string> cp(const std::vector<unsigned char> &data_buffer);
+
+    std::string string_literal(std::vector<unsigned char> data_buffer);
 };
 
 

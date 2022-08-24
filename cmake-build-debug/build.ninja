@@ -64,6 +64,12 @@ build CMakeFiles/jolt.dir/constantpool.cpp.o: CXX_COMPILER__jolt_Debug /Users/da
   OBJECT_DIR = CMakeFiles/jolt.dir
   OBJECT_FILE_DIR = CMakeFiles/jolt.dir
 
+build CMakeFiles/jolt.dir/constant.cpp.o: CXX_COMPILER__jolt_Debug /Users/dada/Documents/jolt/constant.cpp || cmake_object_order_depends_target_jolt
+  DEP_FILE = CMakeFiles/jolt.dir/constant.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++14
+  OBJECT_DIR = CMakeFiles/jolt.dir
+  OBJECT_FILE_DIR = CMakeFiles/jolt.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target jolt
@@ -72,7 +78,7 @@ build CMakeFiles/jolt.dir/constantpool.cpp.o: CXX_COMPILER__jolt_Debug /Users/da
 #############################################
 # Link the executable jolt
 
-build jolt: CXX_EXECUTABLE_LINKER__jolt_Debug CMakeFiles/jolt.dir/main.cpp.o CMakeFiles/jolt.dir/parser.cpp.o CMakeFiles/jolt.dir/constantpool.cpp.o
+build jolt: CXX_EXECUTABLE_LINKER__jolt_Debug CMakeFiles/jolt.dir/main.cpp.o CMakeFiles/jolt.dir/parser.cpp.o CMakeFiles/jolt.dir/constantpool.cpp.o CMakeFiles/jolt.dir/constant.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk
   LINK_FLAGS = -L/opt/homebrew/opt/openssl@1.1/lib
   OBJECT_DIR = CMakeFiles/jolt.dir

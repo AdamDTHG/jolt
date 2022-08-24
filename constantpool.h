@@ -10,9 +10,9 @@
 
 class constantpool {
 public:
-    constantpool(const std::vector<unsigned char> &data_buffer, const int &n_bytes, const long &current_index);
+    constantpool(const std::vector<unsigned char> &data_buffer, const int &n_bytes, const int &current_index);
 
-    const std::vector<unsigned char> &get_cp_list() const;
+    std::vector<unsigned char> get_cp_list() const;
 
     const unsigned char &get_const(int index);
 
