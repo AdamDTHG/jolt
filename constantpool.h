@@ -7,18 +7,17 @@
 
 
 #include <vector>
+#include "constant.h"
 
 class constantpool {
 public:
-    constantpool(const std::vector<unsigned char> &data_buffer, const int &n_bytes, const int &current_index);
+    constantpool();
 
-    std::vector<unsigned char> get_cp_list() const;
+    std::vector<constant> get_cp_list() const;
 
-    const unsigned char &get_const(int index);
+    const constant& get_const(int index);
 
-private:
-    std::vector<unsigned char> cp_list;
-
+    std::vector<constant> cp_list;
 };
 
 

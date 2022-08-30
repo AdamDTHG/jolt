@@ -9,6 +9,8 @@
 #include <iostream>
 #include <vector>
 #include "constantpool.h"
+#include "constant.h"
+
 
 class parser {
 public:
@@ -19,17 +21,15 @@ public:
 
 private:
     int current_index;
-    int u(const std::vector<unsigned char> &data_buffer);
+    unsigned char u(const std::vector<unsigned char> &data_buffer);
 
     uint16_t u2(const std::vector<unsigned char> &data_buffer);
 
     uint32_t u4(const std::vector<unsigned char> &data_buffer);
 
-//    uint64_t u8(const std::vector<unsigned char> &data_buffer);
+    std::string string_literal(const std::vector<unsigned char>& data_buffer);
 
-    std::vector<std::string> cp(const std::vector<unsigned char> &data_buffer);
-
-    std::string string_literal(std::vector<unsigned char> data_buffer);
+    constantpool cp(const std::vector<unsigned char> &data_buffer, const int &cp_max_size);
 };
 
 
