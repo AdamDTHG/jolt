@@ -9,15 +9,15 @@
 #include <vector>
 #include "constant.h"
 
-class constantpool {
+class ConstantPool {
 public:
-    constantpool();
+    ConstantPool();
 
-    std::vector<constant> get_cp_list() const;
+    std::vector<Constant> get_cp_list() const;
 
-    const constant& get_const(int index);
+    const Constant& get_const(int index);
 
-    std::vector<constant> cp_list;
+    std::vector<Constant> cp_list;
 };
 
 

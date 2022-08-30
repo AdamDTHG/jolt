@@ -8,10 +8,10 @@
 
 #include <string>
 
-class constant {
+class Constant {
 public:
 
-    constant(unsigned char tag, const std::string &stringLiteral, uint16_t nameIndex, uint16_t stringIndex,
+    Constant(unsigned char tag, const std::string &stringLiteral, uint16_t nameIndex, uint16_t stringIndex,
              uint16_t classIndex, uint16_t nameAndTypeIndex, uint16_t descIndex);
 
     unsigned char getTag() const;
@@ -35,7 +35,6 @@ public:
     uint16_t class_index;
     uint16_t name_and_type_index;
     uint16_t desc_index;
-
 };
 
 

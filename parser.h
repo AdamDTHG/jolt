@@ -12,9 +12,9 @@
 #include "constant.h"
 
 
-class parser {
+class Parser {
 public:
-    parser() = default;
+    Parser() = default;
 
     void parse(const std::vector<unsigned char> &data_buffer);
 
@@ -29,7 +29,9 @@ private:
 
     std::string string_literal(const std::vector<unsigned char>& data_buffer);
 
-    constantpool cp(const std::vector<unsigned char> &data_buffer, const int &cp_max_size);
+    ConstantPool cpinfo(const std::vector<unsigned char> &data_buffer, const int &cp_max_size);
+
+    Constant parse_constant(const std::vector<unsigned char> &data_buffer);
 };
 
 

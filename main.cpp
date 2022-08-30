@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
 
     std::vector<unsigned char> data = readFile(argv[1]);
 //    dbg::DEBUG_BUFFER(data);
-    parser p{};
-    p.parse(data);
+    Parser parser{};
+    parser.parse(data);
     return 0;
 }
