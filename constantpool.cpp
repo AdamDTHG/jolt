@@ -5,12 +5,13 @@
 #include "constantpool.h"
 #include "parser.h"
 
-ConstantPool::ConstantPool() {}
+ConstantPool::ConstantPool(const std::vector<Constant> &pool) : pool(pool) {}
 
-std::vector<Constant> ConstantPool::get_cp_list() const {
-    return cp_list;
+std::vector<Constant> ConstantPool::get_pool() const {
+    return pool;
 }
 
 Constant const& ConstantPool::get_const(int index) {
-    return cp_list[index];
+    return pool[index];
 }
+

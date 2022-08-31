@@ -4,6 +4,8 @@
 
 #include "constant.h"
 
+#include <utility>
+
 Constant::Constant(unsigned char tag, const std::string &stringLiteral, uint16_t nameIndex, uint16_t stringIndex,
                    uint16_t classIndex, uint16_t nameAndTypeIndex, uint16_t descIndex) : tag(tag),
                                                                                          string_literal(stringLiteral),
@@ -41,4 +43,3 @@ uint16_t Constant::getDescIndex() const {
 unsigned char Constant::getTag() const {
     return tag;
 }
-

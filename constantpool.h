@@ -11,13 +11,14 @@
 
 class ConstantPool {
 public:
-    ConstantPool();
+    explicit ConstantPool(const std::vector<Constant> &pool);
 
-    std::vector<Constant> get_cp_list() const;
+    std::vector<Constant> get_pool() const;
 
     const Constant& get_const(int index);
 
-    std::vector<Constant> cp_list;
+private:
+    std::vector<Constant> pool;
 };
 
 

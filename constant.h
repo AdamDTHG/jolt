@@ -10,11 +10,10 @@
 
 class Constant {
 public:
+    explicit Constant(unsigned char tag = 0x00, const std::string &stringLiteral = "", uint16_t nameIndex = 0, uint16_t stringIndex = 0,
+             uint16_t classIndex = 0, uint16_t nameAndTypeIndex = 0, uint16_t descIndex = 0);
 
-    Constant(unsigned char tag, const std::string &stringLiteral, uint16_t nameIndex, uint16_t stringIndex,
-             uint16_t classIndex, uint16_t nameAndTypeIndex, uint16_t descIndex);
-
-    unsigned char getTag() const;
+    virtual unsigned char getTag() const;
 
     const std::string &getStringLiteral() const;
 
@@ -28,6 +27,7 @@ public:
 
     uint16_t getDescIndex() const;
 
+private:
     unsigned char tag;
     std::string string_literal;
     uint16_t name_index;

@@ -14,24 +14,55 @@
 
 class Parser {
 public:
-    Parser() = default;
+    Parser(const std::vector<unsigned char> &dataBuffer);
 
-    void parse(const std::vector<unsigned char> &data_buffer);
+    /**
+     * parse java classfile
+     */
+    void parse();
 
 
 private:
-    int current_index;
-    unsigned char u(const std::vector<unsigned char> &data_buffer);
+    const std::vector<unsigned char> &data_buffer;
+    int current_index{};
 
-    uint16_t u2(const std::vector<unsigned char> &data_buffer);
+    /**
+     * Read 1 byte from data_buffer
+     * @return
+     */
+    unsigned char u();
 
-    uint32_t u4(const std::vector<unsigned char> &data_buffer);
+    /**
+     * Read 2 bytes
+     * @return
+     */
+    uint16_t u2();
 
-    std::string string_literal(const std::vector<unsigned char>& data_buffer);
+    /**
+     * Read 4 bytes
+     * @return
+     */
+    uint32_t u4();
 
-    ConstantPool cpinfo(const std::vector<unsigned char> &data_buffer, const int &cp_max_size);
+    /**
+     * parse a string literal value in bytes
+     * @return
+     */
+    std::string string_literal();
 
-    Constant parse_constant(const std::vector<unsigned char> &data_buffer);
+    /**
+     * parses constatns in constpool
+     * @param cp_max_size
+     * @return ConstantPool
+     */
+    ConstantPool cpinfo(const int &cp_max_size);
+
+    /**
+     * Parse a single constant
+     * @return Constant
+     */
+    Constant parse_constant();
+
 };
 
 

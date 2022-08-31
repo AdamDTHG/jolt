@@ -7,107 +7,92 @@
 
 #define DEBUG_MODE
 
-/**
- * Parse a Java Classfile
- * @param data_buffer
- */
-void Parser::parse(std::vector<unsigned char> const& data_buffer) {
-    const auto magic = u4(data_buffer);
-    const auto major = u2(data_buffer);
-    const auto minor = u2(data_buffer);
-    const auto constpoolsize = u2(data_buffer);
-    const auto cpool = cpinfo(data_buffer, constpoolsize);
+Parser::Parser(const std::vector<unsigned char> &dataBuffer)
+        : data_buffer(dataBuffer) {
+}
+
+void Parser::parse() {
+    const auto magic = u4();
+    const auto major = u2();
+    const auto minor = u2();
+    const auto constpoolsize = u2();
+    const auto cpool = cpinfo(constpoolsize);
 #ifdef DEBUG_MODE
     std::cout << "magic: " << std::hex << magic << "\n";
     std::cout << "major: " << std::hex << major << "\n";
     std::cout << "minor: " << std::hex << minor << "\n";
     std::cout << "const pool size: " << constpoolsize << "\n";
-    for (const auto& constant : cpool.get_cp_list()) {
-        std::cout << "DEBUG CONSTANT -> " << constant.string_literal << "\n";
+    for (const auto& constant : cpool.get_pool()) {
+        std::cout << "DEBUG CONSTANT -> " << constant.getStringLiteral() << "\n";
     }
 #endif
 }
 
-/**
- * Read 1 byte
- * @param data_buffer
- * @return
- */
-unsigned char Parser::u(std::vector<unsigned char> const &data_buffer) {
+unsigned char Parser::u() {
     int idx = current_index;
     current_index++;
     return data_buffer[idx];
 }
 
-/**
- * Read 2 bytes
- * @param data_buffer
- * @return
- */
-uint16_t Parser::u2(std::vector<unsigned char> const &data_buffer) {
+uint16_t Parser::u2() {
     int idx = current_index;
     current_index+=2;
     return (data_buffer[idx] << 8) | (data_buffer[idx+1]);
 }
 
-/**
- * Read 4 bytes
- * @param data_buffer
- * @return
- */
-uint32_t Parser::u4(std::vector<unsigned char> const &data_buffer) {
+uint32_t Parser::u4() {
     int idx = current_index;
     current_index+=4;
     return (data_buffer[idx] << 24) | (data_buffer[idx+1] << 16) | (data_buffer[idx+2] << 8) | (data_buffer[idx+3]);
 }
 
-ConstantPool Parser::cpinfo(std::vector<unsigned char> const& data_buffer, int const& cp_max_size) {
-    ConstantPool constpool;
-    while (constpool.cp_list.size() < cp_max_size - 1) {
-        constpool.cp_list.push_back(parse_constant(data_buffer));
+ConstantPool Parser::cpinfo(int const& cp_max_size) {
+    std::vector<Constant> cp;
+    while (cp.size() < cp_max_size - 1) {
+        cp.push_back(parse_constant());
     }
-    return constpool;
+    return ConstantPool{cp};
 }
 
-Constant Parser::parse_constant(std::vector<unsigned char> const& data_buffer) {
-    Constant c {0, "", 0, 0, 0, 0, 0};
-    c.tag = u(data_buffer);
-    switch (c.tag) {
+/**
+ * TODO: Refactor this function using a factory method for Constant.
+ */
+Constant Parser::parse_constant() {
+    auto const tag = u();
+    switch (tag) {
         case 0x01:{
-            c.string_literal = string_literal(data_buffer);
-            break;
+            auto const string = string_literal();
+            return Constant{tag, string};
         }
         case 0x07: { // Class Index
-            c.name_index = u2(data_buffer);
-            break;
+            auto const name_index = u2();
+            return Constant{tag, "", name_index};
         }
         case 0x08: { // String reference Index
-            c.string_index = u2(data_buffer);
-            break;
+            auto const string_index = u2();
+            return Constant{tag, "", 0, string_index};
         }
         case 0x09: case 0x0A: { // Field and Method
-            c.class_index = u2(data_buffer);
-            c.name_and_type_index = u2(data_buffer);
-            break;
+            auto const class_index = u2();
+            auto const name_and_type_index = u2();
+            return Constant{tag, "", 0, 0, class_index, name_and_type_index};
         }
         case 0x0c: { // Name and Type
-            c.name_index = u2(data_buffer);
-            c.desc_index = u2(data_buffer);
-            break;
+            auto const name_index = u2();
+            auto const desc_index = u2();
+            return Constant{tag, "", name_index, 0, 0, 0, desc_index};
         }
         default: {
-            std::cerr << "Unknown Constant Tag -> 0x" << std::hex << std::uppercase << (int) c.tag << "\n";
-            break;
+            std::cerr << "Unknown Constant Tag -> 0x" << std::hex << std::uppercase << (int) tag << "\n";
         }
     }
-    return c;
 }
 
-std::string Parser::string_literal(std::vector<unsigned char> const& data_buffer) {
-    auto string_len = u2(data_buffer);
+std::string Parser::string_literal() {
+    auto string_len = u2();
     std::string str;
     while (str.length() < string_len) {
-        str.push_back(u(data_buffer));
+        str.push_back(u());
     }
     return str;
 }
